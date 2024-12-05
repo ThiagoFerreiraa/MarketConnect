@@ -1,0 +1,6 @@
+@MarketConnect.ProductAPI_HostAddress = http://localhost:5069
+
+GET {{MarketConnect.ProductAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

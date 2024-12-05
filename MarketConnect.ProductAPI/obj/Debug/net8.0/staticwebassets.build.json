@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "hl9KT7JKhLhwgAirjudiu8kDWrvViEQPNrECeeYs0t0=",
+  "Source": "MarketConnect.ProductAPI",
+  "BasePath": "_content/MarketConnect.ProductAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
