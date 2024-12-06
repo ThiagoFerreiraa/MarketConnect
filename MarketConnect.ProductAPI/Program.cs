@@ -17,10 +17,12 @@ namespace MarketConnect.ProductAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            
+            //Create connection with Database
             var sqlServerConnection = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(sqlServerConnection));
+
+            //Create AutoMapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 
