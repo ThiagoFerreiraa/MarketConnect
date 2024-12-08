@@ -1,5 +1,6 @@
 ﻿using MarketConnect.ProductAPI.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MarketConnect.ProductAPI.DTOs;
 
@@ -27,6 +28,7 @@ public class ProductDTO
     public string? ImageURL { get; set; }
 
     //Propriedades de navegação
+    [JsonIgnore] //Fazer esse atributo em especifico ser ignorado na serialização
     public Category? Category { get; set; }
     public int CategoryID { get; set; }
 }

@@ -1,8 +1,9 @@
 ﻿using MarketConnect.ProductAPI.Context;
 using MarketConnect.ProductAPI.Models;
+using MarketConnect.ProductAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace MarketConnect.ProductAPI.Repositories
+namespace MarketConnect.ProductAPI.Services
 {
     public class ProductRepository : IProductRepository
     {
@@ -33,14 +34,6 @@ namespace MarketConnect.ProductAPI.Repositories
 
             return value;
         }
-
-        public async Task<Product> GetProductByName(string name)
-        {
-            var value = await _context.Products.Where(p => p.Name == name).FirstOrDefaultAsync();
-
-            return value;
-        }
-
         public async Task<Product> Create(Product product)
         {
             //Usando forma diferente para fazer um insert

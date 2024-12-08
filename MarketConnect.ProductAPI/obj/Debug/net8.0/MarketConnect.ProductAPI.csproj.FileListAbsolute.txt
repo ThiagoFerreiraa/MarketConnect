@@ -172,3 +172,4 @@ C:\Users\Thiago\source\repos\MarketConnect\MarketConnect.ProductAPI\obj\Debug\ne
 C:\Users\Thiago\source\repos\MarketConnect\MarketConnect.ProductAPI\obj\Debug\net8.0\MarketConnect.ProductAPI.pdb
 C:\Users\Thiago\source\repos\MarketConnect\MarketConnect.ProductAPI\obj\Debug\net8.0\MarketConnect.ProductAPI.genruntimeconfig.cache
 C:\Users\Thiago\source\repos\MarketConnect\MarketConnect.ProductAPI\obj\Debug\net8.0\ref\MarketConnect.ProductAPI.dll
+C:\Users\Thiago\source\repos\MarketConnect\MarketConnect.ProductAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
