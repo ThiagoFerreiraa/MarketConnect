@@ -1,9 +1,8 @@
 ﻿using MarketConnect.ProductAPI.Context;
 using MarketConnect.ProductAPI.Models;
-using MarketConnect.ProductAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace MarketConnect.ProductAPI.Services
+namespace MarketConnect.ProductAPI.Repositories
 {
     public class ProductRepository : IProductRepository
     {
@@ -14,16 +13,23 @@ namespace MarketConnect.ProductAPI.Services
             _context = context;
         }
 
+        /*
+            Explicando o Include em GetAll e em GetProductsByPrice:
+        
+            Bem, como eu acabei mudando o mapeamento no MappingProfile, possibilitando agora que insira no atributo CategoryName o valor de Category.Name, eu preciso mudar nos metodos de busca, para que realize o Join no select (Include) que assim o retorno da consulta vai trazer o nome da categoria
+         
+        */
+
         public async Task<IEnumerable<Product>> GetAll()
         {
-            var value = await _context.Products.ToListAsync();
+            var value = await _context.Products.Include(c => c.Category).ToListAsync();
 
             return value;
         }
 
         public async Task<IEnumerable<Product>> GetProductsByPrice(decimal price)
         {
-            var value = await _context.Products.Where(p => p.Price == price).ToListAsync();
+            var value = await _context.Products.Include(c => c.Category).Where(p => p.Price == price).ToListAsync();
 
             return value;
         }

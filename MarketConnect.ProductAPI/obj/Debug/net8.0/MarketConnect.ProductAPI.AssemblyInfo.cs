@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MarketConnect.ProductAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74f1e8ab77cc8f82bf0cd3d954742336bc6420f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bfe13e79109fceeae7a09672554516c501c63d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("MarketConnect.ProductAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MarketConnect.ProductAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -26,6 +26,7 @@ public class ProductDTO
     [Range(1,9999)]
     public long Stock { get; set; }
     public string? ImageURL { get; set; }
+    public string? CategoryName { get; set; }
 
     //Propriedades de navegação
     [JsonIgnore] //Fazer esse atributo em especifico ser ignorado na serialização
