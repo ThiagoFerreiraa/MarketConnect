@@ -221,10 +221,10 @@
         }
       }
     },
-    "/api/Product": {
+    "/api/Products": {
       "get": {
         "tags": [
-          "Product"
+          "Products"
         ],
         "responses": {
           "200": {
@@ -260,7 +260,36 @@
       },
       "post": {
         "tags": [
-          "Product"
+          "Products"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
         ],
         "requestBody": {
           "content": {
@@ -288,60 +317,10 @@
         }
       }
     },
-    "/api/Product/{price}": {
+    "/api/Products/{id}": {
       "get": {
         "tags": [
-          "Product"
-        ],
-        "operationId": "GetProductsByPrice",
-        "parameters": [
-          {
-            "name": "price",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductDTO"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductDTO"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Product/{id}": {
-      "get": {
-        "tags": [
-          "Product"
+          "Products"
         ],
         "operationId": "GetProductsById",
         "parameters": [
@@ -378,49 +357,9 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "Product"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "delete": {
         "tags": [
-          "Product"
+          "Products"
         ],
         "parameters": [
           {
@@ -560,6 +499,10 @@
             "format": "int64"
           },
           "imageURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryName": {
             "type": "string",
             "nullable": true
           },

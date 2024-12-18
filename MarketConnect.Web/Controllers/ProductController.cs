@@ -2,6 +2,8 @@
 using MarketConnect.Web.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MarketConnect.Web.Controllers
 {
@@ -39,14 +41,80 @@ namespace MarketConnect.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct(ProductViewModel pProductVM)
         {
-            var result = await _productService.CreateProduct(pProductVM);
+            if (ModelState.IsValid)
+            {
+                var result = await _productService.CreateProduct(pProductVM);
 
-            if (result == null)
+                if (result != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+            else
+            {
+                ViewBag.CategoryId = new SelectList(await _categoryService.GetAllCategories(), "CategoryId", "Name");
+            }
+
+            return View(pProductVM);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateProduct(int id)
+        {
+            ViewBag.CategoryId = new SelectList(await _categoryService.GetAllCategories(), "CategoryId", "Name");
+
+            var result = await _productService.FindProductById(id);
+
+            if (result == null) {
+                
+                return View("Error");
+            
+            }
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProduct(ProductViewModel productVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _productService.UpdateProduct(productVM);
+
+                if (result != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View(productVM);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var result = await _productService.FindProductById(id);
+
+            if(result is null)
             {
                 return View("Error");
             }
 
-            return View();
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(ProductViewModel productVM)
+        {
+            var result = await _productService.DeleteProduct(productVM.Id);
+
+            if (result)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productVM);
         }
     }
 }

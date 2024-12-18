@@ -28,18 +28,18 @@ namespace MarketConnect.ProductAPI.Controllers
             return Ok(productDto);
         }
 
-        [HttpGet("{price:decimal}", Name = "GetProductsByPrice")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByPrice(decimal price)
-        {
-            var productDto = await _productService.GetProductsByPrice(price);
+        //[HttpGet("{price:decimal}", Name = "GetProductsByPrice")]
+        //public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByPrice(decimal price)
+        //{
+        //    var productDto = await _productService.GetProductsByPrice(price);
 
-            if (productDto == null)
-            {
-                return NotFound();
-            }
+        //    if (productDto == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(productDto);
-        }
+        //    return Ok(productDto);
+        //}
 
         [HttpGet("{id:int}", Name = "GetProductsById")]
         public async Task<ActionResult<ProductDTO>> GetProductById(int id)
@@ -67,17 +67,13 @@ namespace MarketConnect.ProductAPI.Controllers
             return new CreatedAtRouteResult("GetProductsById", new { id = productDto.Id }, productDto);
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] ProductDTO productDto)
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] ProductDTO productDto)
         {
-            if (id != productDto.Id)
-            {
-                return BadRequest();
-            }
 
             if (productDto == null)
             {
-                return NotFound();
+                return BadRequest("Data invalid");
             }
 
             await _productService.UpdateProduct(productDto);

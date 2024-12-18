@@ -1,5 +1,6 @@
 ﻿using MarketConnect.Web.Models;
 using MarketConnect.Web.Services.Contracts;
+using System.Text;
 using System.Text.Json;
 
 namespace MarketConnect.Web.Services;
@@ -9,6 +10,7 @@ public class CategoryService : ICategoryService
     private readonly IHttpClientFactory _clientFactory;
     private readonly JsonSerializerOptions _options;
     private const string apiEndpoint = "api/categories";
+    private HttpClient client; 
     private CategoryViewModel categoryVM;
     private IEnumerable<CategoryViewModel> categoriesVM;
 
@@ -16,29 +18,125 @@ public class CategoryService : ICategoryService
     {
         _clientFactory = clientFactory;
         _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        client = _clientFactory.CreateClient("ProductApi");
     }
-    public Task<IEnumerable<CategoryViewModel>> GetAllCategories()
+    public async Task<IEnumerable<CategoryViewModel>> GetAllCategories()
     {
-        throw new NotImplementedException();
+
+        using (var response = await client.GetAsync(apiEndpoint))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStreamAsync();
+
+                categoriesVM = await JsonSerializer.DeserializeAsync<IEnumerable<CategoryViewModel>>(result, _options);
+            }
+            else
+            {
+                return null;
+            }
+
+            return categoriesVM;
+        }
     }
-    public Task<IEnumerable<CategoryViewModel>> GetAllCategoriesProducts()
+    public async Task<IEnumerable<CategoryViewModel>> GetAllCategoriesProducts()
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        using (var response = await client.GetAsync(apiEndpoint + "products"))
+        {
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStreamAsync();
+
+                categoriesVM = await JsonSerializer.DeserializeAsync<IEnumerable<CategoryViewModel>>(result, _options);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        return categoriesVM;
     }
-    public Task<CategoryViewModel> FindCategoryById(int id)
+    public async Task<CategoryViewModel> FindCategoryById(int id)
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        using (var response = await client.GetAsync(apiEndpoint + id))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStreamAsync();
+
+                categoryVM = await JsonSerializer.DeserializeAsync<CategoryViewModel>(result, _options);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        return categoryVM;
     }
-    public Task<CategoryViewModel> CreateCategory(CategoryViewModel categoryVM)
+    public async Task<CategoryViewModel> CreateCategory(CategoryViewModel pCategoryVM)
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        StringContent categoryVmPost = new StringContent(JsonSerializer.Serialize(pCategoryVM), Encoding.UTF8,"application/json");
+
+        using (var response = await client.PostAsync(apiEndpoint, categoryVmPost))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStreamAsync();
+
+                categoryVM = await JsonSerializer.DeserializeAsync<CategoryViewModel>(result, _options);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        return categoryVM;
     }
-    public Task<CategoryViewModel> UpdateCategory(CategoryViewModel categoryVM)
+    public async Task<CategoryViewModel> UpdateCategory(CategoryViewModel pCategoryVM)
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        StringContent categoryVmPut = new StringContent(JsonSerializer.Serialize(pCategoryVM), Encoding.UTF8, "application/json");
+
+        using (var response = await client.PutAsync(apiEndpoint, categoryVmPut))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStreamAsync();
+
+                categoryVM = await JsonSerializer.DeserializeAsync<CategoryViewModel>(result, _options);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        return categoryVM;
     }
-    public Task<bool> RemoveCategory(int id)
+    public async Task<bool> RemoveCategory(int id)
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        using (var response = await client.DeleteAsync(apiEndpoint + id))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
