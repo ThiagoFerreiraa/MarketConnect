@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketConnect.ProductAPI", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketConnect.Web", "MarketConnect.Web\MarketConnect.Web.csproj", "{0A304AB1-11C1-4B33-B7DF-CD48172AF2A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketConnect.IdentityServer", "MarketConnect.IdentityServer\MarketConnect.IdentityServer.csproj", "{5EF12272-EEBE-4800-A1D0-4FAEF5D0887C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{567937DA-B7E3-4AA0-99F0-470F19F46049}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{14595E82-238B-4D19-BBF7-2EC231F8E2C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +27,17 @@ Global
 		{0A304AB1-11C1-4B33-B7DF-CD48172AF2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A304AB1-11C1-4B33-B7DF-CD48172AF2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A304AB1-11C1-4B33-B7DF-CD48172AF2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF12272-EEBE-4800-A1D0-4FAEF5D0887C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF12272-EEBE-4800-A1D0-4FAEF5D0887C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF12272-EEBE-4800-A1D0-4FAEF5D0887C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF12272-EEBE-4800-A1D0-4FAEF5D0887C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D7DE50DB-686A-4287-80E1-BEDB7EF56841} = {567937DA-B7E3-4AA0-99F0-470F19F46049}
+		{0A304AB1-11C1-4B33-B7DF-CD48172AF2A4} = {14595E82-238B-4D19-BBF7-2EC231F8E2C3}
+		{5EF12272-EEBE-4800-A1D0-4FAEF5D0887C} = {567937DA-B7E3-4AA0-99F0-470F19F46049}
 	EndGlobalSection
 EndGlobal
