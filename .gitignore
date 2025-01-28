@@ -402,6 +402,7 @@ FodyWeavers.xsd
 #Bin 
 Bin/*
 obj/*
+MarketConnect.ProductAPI\obj\*
 
 #Solution
 .sln
