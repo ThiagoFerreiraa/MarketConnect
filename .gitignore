@@ -402,3 +402,6 @@ FodyWeavers.xsd
 #Bin 
 Bin/*
 obj/*
+
+#Solution
+.sln
