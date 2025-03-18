@@ -22,7 +22,7 @@ namespace MarketConnect.ProductAPI
             builder.Services.AddSwaggerGen();
 
             //Create connection with Database
-            var sqlServerConnection = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+            var sqlServerConnection = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(sqlServerConnection));
 
             //Create AutoMapper
